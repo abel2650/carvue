@@ -9,12 +9,18 @@
             
             <!-- Import Vue.js --> 
              <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> 
+             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         </head> 
         <body> 
             <div id="app"> 
+                
                 <div class="nav-bar">
                     
                 </div> <h1>{{ intro }}</h1>
+                <button @click="getAllCars">Liste af biler</button>
+                <ul>
+                    <li v-for="Car in carList">{{Car.vendor}}:{{Car.model}}</li>
+                </ul>
             </div>
 
             <!-- Import App --> 

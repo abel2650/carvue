@@ -1,32 +1,52 @@
 <!DOCTYPE html> 
-    <html lang="en"> 
-        <head> 
-            <meta charset="UTF-8" /> 
-            <title>Vue Template</title> 
-            
-            <!-- Import Styles --> 
-            <link rel="stylesheet" href="styles.css" />
-            
-            <!-- Import Vue.js --> 
-             <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> 
-             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        </head> 
-        <body> 
-            <div id="app"> 
-                
-                <div class="nav-bar">
-                    
-                </div> <h1>{{ intro }}</h1>
-                <button @click="getAllCars">Liste af biler</button>
-                <ul>
-                    <li v-for="Car in carList">{{Car.vendor}}:{{Car.model}}</li>
-                </ul>
-            </div>
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Template</title> 
 
-            <!-- Import App --> 
-            <script src="main.js"></script>
+    <!-- Import Styles --> 
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Import Vue.js og Axios --> 
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head> 
+<body> 
+    <div id="app"> 
+        <header class="nav-bar">
+            <!-- Navigation kan tilføjes her -->
+        </header> 
+
+        <main>
+            <h1>{{ intro }}</h1>
+
             
-            <!-- Mount App --> 
-            <script> const mountedApp = app.mount('#app') </script> 
-        </body>
-    </html>
+            <!-- Knap til at hente alle biler -->
+            <button @click="getAllCars">Liste af biler</button>
+
+            <!-- Input og knap til at hente bil baseret på ID -->
+            <input v-model.number="getCarId" placeholder="Indtast bil-ID" type="number" />
+            <button @click="getByCarId(getCarId)">Get By Car ID</button>
+
+            <!-- Fejlbesked -->
+            <p v-if="error" class="error">Fejl: {{ error }}</p>
+
+            <!-- Liste over biler -->
+            <ul v-if="carList.length>0">
+                <li v-for="car in carList" :key="car.id">
+                    Mærke: {{ car.vendor }} | Model: {{ car.model }} | Pris: {{ car.price }} kr.
+                </li>
+            </ul>
+
+            <!-- Hvis listen er tom -->
+            <p v-else>Ingen biler fundet.</p>
+        </main>
+    </div>
+
+    <!-- Import App --> 
+    <script src="main.js"></script>
+    
+    
+</body>
+</html> 
